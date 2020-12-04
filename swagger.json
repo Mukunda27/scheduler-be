@@ -1,0 +1,127 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Meeting Scheduler",
+    "description": "Meeting Scheduler REST API",
+    "contact": {
+      "email": "rmukunda.27@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+
+  "paths": {
+    "/create": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create new user",
+        "produces": ["application/json"],
+        "parameters": [{ "$ref": "#/components/parameters/user" }],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+
+            "schema": {
+              "title": "Sample Response",
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "User created successfully !"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "title": "Sample error response",
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "title": "User",
+      "type": "object",
+      "required": ["name", "phone", "email", "password", "admin"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "admin": {
+          "type": "boolean"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "user": {
+        "in": "body",
+        "name": "user",
+        "description": "Details of the user",
+        "required": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "Mason Mount"
+            },
+            "admin": {
+              "type": "boolean",
+              "example": "false"
+            },
+            "phone": {
+              "type": "string",
+              "example": "+918888888888"
+            },
+            "email": {
+              "type": "string",
+              "example": "mount@gmail.com"
+            },
+            "password": {
+              "type": "string",
+              "example": "asdaqw!@3"
+            }
+          }
+        }
+      }
+    }
+  }
+}
